@@ -41,12 +41,20 @@
         ]
 
         /* 
-            VI skal skrive ut hver forelseser i arran som et listepunkt <li>
+            VI skal skrive ut hver forelseser i arran som et listepunkt: <li>
+            Før vi skrieer ut arrayen, skal vi filtrrere vekk forelesere født før 1990
+            Vi må gå gjennom hele arrayen med et filter; .filter
+            Når vi kjører .filter, må vi mellomlagre element i en variabel: lecturer
+            For hver lecturer, må vi gjøre en sammenligning (akkuratt som en if-betingelse)
+            I dette tilfellet; er birthyear større eller lik 1990, skal foreleseren inkluderes
+            
+            Etter vi har filtrert, skal vi skrive ut de gjenværende foreleserene:
             VI må gå igjennom hele arrayen arrayen: .map()
             Når vi .mapper, må vi mellomlagre element i en variabel: lecturer
             For hver lecturer, må vi legge til en <Li> i <ud id="profiles">
         */
-       lecturers.map(lecturer => document.getElementById("profiles").innerHTML += `<li>${lecturer.personname} 
+
+       lecturers.filter(lecturer =>  lecturer.birthyear >= 1990).map(lecturer => document.getElementById("profiles").innerHTML += `<li>${lecturer.personname} 
             <ul>
               ${lecturer.courses.map(course => `<li>${course} </li>`).join("")}  
             </ul>

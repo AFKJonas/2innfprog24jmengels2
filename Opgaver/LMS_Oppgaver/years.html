@@ -3,25 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Years List</title>
 </head>
 <body>
-    
-
     <ul id="events"></ul>
-    
 
+    <script>
+        // Array with years
+        var years = [1066, 1564, 1455, 1346, 1215];
 
-<script>
+        // Sort years in descending order
+        years.sort(function(a, b) {
+            return b - a;
+        });
 
-    const years = [1066, 1564, 1455, 1346, 1215];
-    years.sort();
-    years.reverse()
-    console.log(years);
-    
+        // Check sorted array in console
+        console.log(years);
 
+        // Initialize eventHTML to store HTML string
+        var eventHTML = "";
 
-</script>
+        // Build the HTML string with .map() and join to make it a single string
+        eventHTML = years.map(function(year) {
+            return `<li>${year}</li>`;
+        }).join("");
 
+        // Insert the HTML into the <ul> element
+        document.getElementById("events").innerHTML = eventHTML;
+    </script>
 </body>
 </html>

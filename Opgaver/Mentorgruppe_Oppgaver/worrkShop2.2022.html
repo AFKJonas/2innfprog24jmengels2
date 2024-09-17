@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Workshop 1: Variabler</title>
+    <link href="task2.css" rel="stylesheet" media="all">
+</head>
+<body>
+    <div id="gamearea">
+        <section id="hud-top">
+            <div id="lives"><img src="img/potions.png" /> <span id="lives-count">0</span></div>
+            <div id="coins"><img src="img/coins.png" /> <span id="coins-count">0</span></div>
+            <div id="player">
+                <img src="img/person.png" />
+                <span id="playername">Marius</span>
+            </div>
+            <div id="points"><img src="img/points.png" /> <span id="points-count">0</span></div>
+            <!--workshop 1, oppgave 6-->
+            <div id="level">Level: <span id="level-count">0</span></div>
+        </section>
+        <aside id="hud-inventory">
+            <h3>Armory</h3>
+            <table id="showhide">
+                <tr>
+                    <td><img src="img/longsword.png"></td>
+                    <td>Level: <span id="weapon-longsword"></span></td>
+                </tr>
+                <tr>
+                    <td><img src="img/warhammer.png"></td>
+                    <td>Level: <span id="weapon-warhammer"></span></td>
+                </tr>
+                <tr>
+                    <td><img src="img/battleaxe.png"></td>
+                    <td>Level: <span id="weapon-battleaxe"></span></td>
+                </tr>
+                <tr>
+                    <td><img src="img/armour.png"></td>
+                    <td>Level: <span id="weapon-armour"></span></td>
+                </tr>
+            </table>
+        </aside>
+    </div>
+    <script> 
+        //workshop 1, oppgave 1 
+        const playerName = "Vilde"
+        document.getElementById("player").innerHTML = playerName
+
+        //workshop1, oppgave 2
+        let coins = 5
+        let coinsPrint = ""
+
+        if(coins <= 0){
+            coinsPrint = "get some coins"
+        } else {
+            coinsPrint = coins
+        }
+
+        document.getElementById("coins-count").innerHTML = coinsPrint 
+
+
+
+        //workshop 1, oppgave 3 
+        let lives = 1
+        document.getElementById("lives-count").innerHTML = lives;
+        if(lives < 2 ) {
+            document.getElementById("lives-count").style.color = "red";
+        }
+
+
+
+
+        //workshop 1, oppgave 4
+        let longsword = 15
+        let warhammer = 2
+        let battleaxe = 3
+        let armour = 4 
+ 
+        
+        //workshop 2, oppgave 2
+       /* const longswordElement = document.getElementById("weapon-longsword")
+        if(longsword >= 10){
+            longswordElement.style.color = "gold"
+        }
+        longswordElement.innerHTML = longsword
+
+        const warhammerElement = document.getElementById("weapon-warhammer")
+        if(warhammer >= 10){
+            warhammerElement.style.color = "gold"
+        }
+        warhammerElement.innerHTML = warhammer
+       
+        const battleaxeElement = document.getElementById("weapon-battleaxe")
+        if(battleaxe >= 10){
+            battleaxeElement.style.color = "gold"
+        }
+        battleaxeElement.innerHTML = battleaxe 
+
+        const armourElement = document.getElementById("weapon-armour")
+        if(armour >= 10){
+            armourElement.style.color = "gold"
+        }
+        armourElement.innerHTML = armour
+    */        
+
+
+    
+        //workshop 1, oppgave 5
+        let points = (coins * 5) + (longsword * 5) + (warhammer * 15) + (battleaxe * 20) + (armour * 25)
+        document.getElementById("points-count").innerHTML = points
+
+        //workshop1, oppgave 6 
+        let level = 1 
+        document.getElementById("level-count").innerHTML = level 
+
+    </script>
+</body>
+</html>

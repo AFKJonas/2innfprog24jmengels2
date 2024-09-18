@@ -11,14 +11,15 @@
 
     <script>
         let htmlString = "";
-        for(let teller = 10; teller >= 0; teller--)  {
-            htmlString += `<li>${ teller=== 0 ? "We have take-off" :teller} </li>`;
- 
+        let teller = 10;
+        while(teller > 0) {
+            console.log(teller)
+            teller --;
         }
-        console.log(htmlString);
-        document.getElementById("nedtelling").innerHTML = htmlString; 
 
-
+    
+        
+        
 
 
     </script>

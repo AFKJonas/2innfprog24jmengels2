@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>animals</title>
+</head>
+<body>
+   
+    <ul id="fisk"></ul>
+
+    <script>
+        const animals = [
+            " Leviathan", 
+            " Ampeel", 
+            " Biter", 
+            " Blighter", 
+            " Boneshark", 
+            " Crabsnake", 
+            " Crabsquid",
+            " Eyeye", 
+            " Garryfish",
+            " PEEPER",
+            ];
+        let htmlString = ""
+        for(let teller = 0; teller < animals.length; teller++ ) {
+            console.log("Animal" + animals[teller]);
+            htmlString += `<li>${animals[teller]}</li>`
+        }
+
+
+        document.getElementById("fisk").innerHTML = htmlString                      
+        
+
+
+
+
+
+
+
+
+    </script>
+    
+</body>
+</html>

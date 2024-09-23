@@ -116,7 +116,7 @@
         var playermark = "X";
         //Dette skriver vi ut i <span>-tagene med id-ene "player" og "playermark" i <div>-tagen med id "playerturn"
         document.getElementById("player").innerHTML = player; 
-//Var en feil linje 118...Enderet kolon til semikolon.......
+//Oppgave 1. Var en feil på linjen over...Enderet kolon til semikolon.......
         document.getElementById("playermark").innerHTML = playermark;
 
         //Så lager vi en teller for å se hvor mange spill vi har spilt:
@@ -165,7 +165,7 @@
         });
         document.getElementById("celle4").addEventListener("click", function() {
             spill(4);
-// På linje 165, var det en skrivefeil i ".addEventListener", rettet opp skrivefeilen.
+//Oppgave 1. På linjen over, var det en skrivefeil i ".addEventListener", rettet opp skrivefeilen.
         });
         document.getElementById("celle5").addEventListener("click", function() {
             spill(5);
@@ -194,7 +194,7 @@
                 
                 //Hvis den er ledig...
                 if(cellSpace === "") {      
-/////Feil i linje 196 med formange "iffff" istedenfor bare "if"........
+//Oppgave 1. Feil på linjen over, med formange "iffff" istedenfor bare "if"........
                     //...sjekk hvilken spiller sin tur det er, og plasser riktig symbol på spillerbrettet
                     if (player === 1) {
                         //Plasser symbol på spillerbrettet i nettleseren
@@ -228,7 +228,8 @@
 
                 //Når spillerens tur er ferdig, er det neste spillers tur.
                 //Det viser vi ved å sette variabelen "player" til 2 hvis den var 1 denne turen, eller hvis den var 2, sett tilbake til 1.
-                //På samme måte må spillersymbolet veksles mellom X og O.
+                //På samme måte må spillersymbolet veksles mellom X og O.                 
+
                 if (player === 1) {
                     player = 2;
                     playermark = "O";
@@ -243,7 +244,7 @@
             //Hvis spillstatus er false, avslutter vi funksjonen uten å utføre noen handlinger.
             } else {
                 //Så returnerer vi spillet 
-//Det var glemt en ekstra "/" på komentar på linje 245..........
+//Oppgave 1. Det var glemt en ekstra "/" på komentar på linjen over..........
                 return;
             }
         }
@@ -277,16 +278,23 @@
             }
 
             //Hvis runden er vunnet, skal vi gjøre noen handlinger:
+
             if(rundenVunnet === true) {
                 //Skriv ut hvilken spiller som har vunnet
+
+
+//Oppgave 3. funksjonen "setTimeout(function() {},1000);" har blitt lagt til, ved delay på 1 sek. også er "},1000);" blitt satt et stykke ned til under, slik at ikke bare setningen er forsinket men farge-boksen og restart boksen  
+                setTimeout(function() {
                 document.getElementById("playerturn").innerHTML = "Spiller " + player + " har vunnet!";
+            
                 //Gjør restart spill-knappen synlig
 
 
                 document.getElementById("newgame").style.display = "block";
 
                 document.getElementById("playerturn").style.backgroundColor = "#FFD700"
-//Skrev: "document.getElementById("playerturn")" for at HTML skal finne akuratt hvor spill-kanppen er, også ".style.backgroundColor = "#FFD700" for å gjøre den spillknappen synlig med "#FFD700" fargen...... 
+            }, 1000);
+// Oppgave 2. Skrev inn: "document.getElementById("playerturn")" for at nettleseren skal finne hvor akuratt spill-kanppen er, også ".style.backgroundColor = "#FFD700" for å gjøre den spillknappen synlig med "#FFD700" fargen...... 
 
                 //Sett spillstatus til false, slik at ingen spillere får plassere
                 //flere brikker på brettet - dette løses med sjekken i funksjonen spill()

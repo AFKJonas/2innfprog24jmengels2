@@ -67,6 +67,17 @@
             color: white;
             cursor: pointer;
         }
+        #antgame {
+            width: 300px;
+            padding: 20px;
+            display: block;
+            margin: 20px auto;
+            background: #6ea100;
+            border: 2px solid #000;
+            border-radius: 5px;
+            color: #000;
+            font-size: 30px;
+            }
     </style>
 
 </head>
@@ -87,7 +98,7 @@
     <button id="newgame" onclick="restartGame()">Start spill på nytt</button>
     
     
-    <section id="antgame"></section>
+    <section id="antgame">Antall spill: 0</section>
 
 
     <script>
@@ -124,8 +135,10 @@
         document.getElementById("playermark").innerHTML = playermark;
 
         //Så lager vi en teller for å se hvor mange spill vi har spilt:
+//Oppgave 4.
         var antallSpill = 1;
-            antallSpill++;
+
+
 
         //Vi må også ha en oversikt over hvilke kombinasjoner av brikkeplasseringer 
         //(indexer i spillerBrikker-arrayen)

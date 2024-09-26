@@ -135,7 +135,6 @@
         document.getElementById("playermark").innerHTML = playermark;
 
         //Så lager vi en teller for å se hvor mange spill vi har spilt:
-//Oppgave 4.
         var antallSpill = 1;
 
 
@@ -315,12 +314,13 @@
             //Gjør restart spill-knappen synlig
                 document.getElementById("newgame").style.display = "block";
 
+                
+// Oppgave 2. Skrev inn: "document.getElementById("playerturn")" for at nettleseren skal finne hvor akuratt spill-kanppen er, også ".style.backgroundColor = "#FFD700" for å gjøre den spillknappen synlig med "#FFD700" fargen...... 
                 document.getElementById("playerturn").style.backgroundColor = "#FFD700"
             }, 1000);
 
             
 
-// Oppgave 2. Skrev inn: "document.getElementById("playerturn")" for at nettleseren skal finne hvor akuratt spill-kanppen er, også ".style.backgroundColor = "#FFD700" for å gjøre den spillknappen synlig med "#FFD700" fargen...... 
 
                 //Sett spillstatus til false, slik at ingen spillere får plassere
                 //flere brikker på brettet - dette løses med sjekken i funksjonen spill()

@@ -67,6 +67,7 @@
             color: white;
             cursor: pointer;
         }
+
         #antgame {
             width: 300px;
             padding: 20px;
@@ -97,12 +98,13 @@
     </section>
     <button id="newgame" onclick="restartGame()">Start spill på nytt</button>
     
-
+    
     <section id="antgame">Antall spill: 0</section>
 
 
     <script>
-//Oppgave 5 begynnte på den over, først med å lage en lik boks som "Start spill på nytt" også navn/id i boksen på linje 101.
+//Oppgave 5. (IKKE FERDIG). Begynnte på den ved at jeg la til en boks over lik med den fra før "Start spill på nytt", tok med navn/id i boksen på linje 101.
+
 
         /* For å forstå hvorfor vi har celle-IDene 0 - 8 i HTML-koden over:
         I alle programmeringsspråk brukes arrayer for å lagre strukturert informasjon.
@@ -303,26 +305,23 @@
                                
                 
                 //Skriv ut hvilken spiller som har vunnet
-//Oppgave 3 i linjen under. funksjonen "setTimeout(function() {},1000);" har blitt lagt til, ved delay på 1 sek. også er "},1000);" blitt plassert et stykke nedenfor (ca 10-12 linjer), slik at ikke bare setningen er forsinket, men også farge-boksen og restart boksen.  
+//Oppgave 3. I linjen under. funksjonen "setTimeout(function() {},1000);" har blitt lagt til, ved delay på 1 sek, også er "},1000);" blitt plassert et stykke nedenfor (ca 10-12 linjer), slik at ikke bare setningen er forsinket, men også farge-boksen og restart boksen.  
                 setTimeout(function() {
                 document.getElementById("playerturn").innerHTML = "Spiller " + player + " har vunnet!";
             
                 
-//Oppgave 4, Har laget 3 utskrifter, slik at hver vinnerKomboPlass 1, 2 og 3 blir markert med fargen "FFD700"   
+//Oppgave 4. Har laget 3 utskrifter, slik at hver vinnerKomboPlass 1, 2 og 3 blir markert med fargen "FFD700"   
                     document.getElementById("celle" + vinnerKomboPlass1).style.color = "#FFD700"
                     document.getElementById("celle" + vinnerKomboPlass2).style.color = "#FFD700"
                     document.getElementById("celle" + vinnerKomboPlass3).style.color = "#FFD700" 
 
             //Gjør restart spill-knappen synlig
                 document.getElementById("newgame").style.display = "block";
-
+            
                 
-// Oppgave 2 i linjen under. Skrev inn: "document.getElementById("playerturn")" for at nettleseren skal finne hvor akuratt spill-kanppen er, også ".style.backgroundColor = "#FFD700" for å gjøre den spillknappen synlig med "#FFD700" fargen...... 
+// Oppgave 2. I linjen under, Skrev inn: "document.getElementById("playerturn")" for at nettleseren skal finne hvor akuratt spill-kanppen er, også ".style.backgroundColor = "#FFD700" for å gjøre den spillknappen synlig med "#FFD700" fargen...... 
                 document.getElementById("playerturn").style.backgroundColor = "#FFD700"
             }, 1000);
-
-            
-
 
                 //Sett spillstatus til false, slik at ingen spillere får plassere
                 //flere brikker på brettet - dette løses med sjekken i funksjonen spill()

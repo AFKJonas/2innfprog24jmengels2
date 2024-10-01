@@ -7,9 +7,41 @@
 </head>
 <body>
 
+    <p>Jonas Markus A. E, E-post: <span id="emailcontainer"></span></p>
 
     <script>
-        
+        //Deklarerre en funksjon/Function "{} er et scope btw"
+        function myFirstFunction() {
+            console.log("Jeg kjører min første funksjon ;-)")
+        } 
+        //KJøre eller kaller funksjonen:
+        myFirstFunction()
+
+        //Deklarere en funksjon med en parameter
+        function printName(name) {
+            console.log("Jeg heter " + name)
+        }
+        printName("Marius")
+
+
+        //Deklarere en funksjon med en parameter som har en standar verdi
+        function printDefaultName(name = "ingenting enda...") {
+            console.log("Jeg heter " + name)
+        }
+        printDefaultName()
+
+        //Lage en funksjon med e-post som link (Template)
+        function createEmailLink(email) {
+            if(!email){
+                return "Ikke oppgitt"
+            }
+            return `<a href="mailto:${email}">${email}</a>` 
+        }
+        console.log( createEmailLink("teamblacwolfen@gmail.com"))
+        document.getElementById("emailcontainer").innerHTML = createEmailLink("SKAAA@emial.com")
+
+
+
     </script>
 </body>
 </html>

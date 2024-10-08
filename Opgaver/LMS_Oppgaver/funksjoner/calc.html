@@ -24,12 +24,10 @@
             document.getElementById("results").innerHTML = `
             <li ${add < 0 ? `class="red"` : null}  > ${num1} + ${num2} = ${add}</li>
             <li ${sub < 0 ? `class="red"` : null}  > ${num1} - ${num2} = ${sub}</li>
-            <li ${div < 0 ? `class="red"`: null}  > ${num1} / ${num2} = ${div}</li>
-            <li ${mul < 0 ? `class="red"` : null} > ${num1} * ${num2} = ${mul}</li>
+            <li ${div < 0 ? `class="red"` : null}  > ${num1} / ${num2} = ${div}</li>
+            <li ${mul < 0 ? `class="red"` : null}  > ${num1} * ${num2} = ${mul}</li>
         `
-
-
-
+        
         }
         calculator(0, 5)
 

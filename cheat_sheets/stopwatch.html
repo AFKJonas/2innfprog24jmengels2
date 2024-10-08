@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stoppeklokke</title>
     <style>
-        body { background: #eee;
+        body { 
+            background: #eee;
             display: flex; 
             flex-direction: column; 
             justify-content: center; 
@@ -47,14 +48,14 @@
         function start() {
             status = true
             btnStart.disabled = true
-            btnstop.disabled = false
+            btnStop.disabled = false
             counter()
         }
 
         function stop () {
             btnStart.disabled = false
-            status = true
-            btnstop.disabled = false
+            status = false
+            btnStop.disabled = true
         }
 
         btnStart.addEventListener("click", start)

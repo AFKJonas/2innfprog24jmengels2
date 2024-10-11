@@ -26,8 +26,8 @@
         </section>
         <img src="icons/c3_logo.svg" alt="Code Concept Collector" />
         <nav>
-            <button id="notebookToggler"><img src="icons/notebook.svg" />Åpne kladdeboka <span class="shortcut">n</span></button>
-            <button id="infoToggler">Info / Hvordan spille <span class="shortcut">i</span></button>
+            <button id="notebookToggler" onClick="toggleVisibility('notebook')"> <img src="icons/notebook.svg"/>Åpne kladdeboka <span class="shortcut">n</span></button>
+            <button id="infoToggler" onClick="toggleVisibility('info')">Info / Hvordan spille <span class="shortcut">i</span></button>
         </nav>
     </header>
     <main>
@@ -81,22 +81,23 @@
 //Oppgave 1.
 
         const gameConfig= {
-            player: "",
-            energy: 5,
-            points: 10,
-            duration: 138,
+            player: "Jonas",
+            energy: 10,
+            points: 50,
+            duration: 123,
         };
 //console.log(gameConfig) For å se om det dukker opp i Nettleseren sin konsoll
 
 
         //TODO: notebook
+        
 
 //Oppgave 2 er lik oppg. 1
         const notebook = {
             variables: 3,
-            arrays: 2,
-            loops: 4,
-            functions: 7,
+            arrays: 17,
+            loops: 5,
+            functions: 3,
         };
 
         
@@ -108,9 +109,9 @@
         document.getElementById("duration").innerHTML = gameConfig.duration;
 
         document.getElementById("variableCount").innerHTML = notebook.variables;
-        document.getElementById("arrayCount").innerHTML = notebook.arrays;
-        document.getElementById("lokkerCount").innerHTML = notebook.variables;
-        document.getElementById("funksjonerCount").innerHTML = notebook.variables;
+        document.getElementById("arrayCount").innerHTML = notebook.loops;
+        document.getElementById("lokkerCount").innerHTML = notebook.functions;
+        document.getElementById("funksjonerCount").innerHTML = notebook.arrays;
     };
     updateStaticUI()
 
@@ -120,8 +121,59 @@
         //TODO: print notebook info to HTML
 
         //(BONUS) TODO: function for all prints
+//Oppgave 1:
 
+        function toggleVisibility(elementid) {
+            console.log(elementid)
+            const elem = document.getElementById(elementid)
+            if(elem.classList.contains("hidden")) {
+                elem.style.display = "block"
+                elem.classList.remove("hidden")
+            } else {
+                elem.style.dispaly = "none"
+                elem.classList.add("hidden")
+            }
 
+        }
+//Oppgave 2
+        document.addEventListener("keydown", function(event) {
+            if(event.key === "n") {
+                toggleVisibility("notebook")
+            }
+            if(event.key === "i") {
+                toggleVisibility("info")
+            }
+        })
+//Oppgave 3
+        document.getElementById("notebookToggler").addEventListener("click", function() {
+            toggleVisibility("notebook")
+        })
+        document.getElementById("infoToggler").addEventListener("click", function(){
+            toggleVisibility("info")
+        })
+
+//Oppgave 4
+        function updateSingleStaticUI(elementid, value) {
+            document.getElementById(elementid).innerHTML = value
+        }
+        //updateSingleStaticUI("duration", 31)
+        
+
+//Oppgave 5
+        function updateConfigValue(configType, value) {
+            configType === "energy" ? gameConfig.energy += value : null
+            configType === "points" ? gameConfig.points += value : null
+            configType === "duration" ? gameConfig.duration += value : null
+            configType === "variable" ? notebook.variables += value : null
+            configType === "arrays" ? notebook.arrays += value : null
+            configType === "functions" ? notebook.functions += value : null
+            configType === "loops" ? notebook.loops += value : null
+
+            updateStaticUI()
+        }
+        updateConfigValue("energy", -3)
+        updateConfigValue("duration", 100)
+        updateConfigValue("loops", 1000)
         
     </script>
 </body>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas cheat sheet</title>
+    <style>
+        body{
+            background-color: #ccc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        canvas{
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="drawingarea"></canvas>
+
+    <script>
+        //Standard config av canvas (GOD KIDE)
+        const canvas = document.getElementById("drawingarea")
+        canvas.width = 800
+        canvas.height = 600
+        const ctx = canvas.getContext("2d")
+
+        //PATH(STI/vei VIKTIG Å AVSLUTTE MED closePath()   !!!! )
+        ctx.beginPath()
+        ctx.moveTo(800, 600) //Høyre(X-aksen), Nedover(Y-aksen)
+        ctx.lineTo(0,0)
+        ctx.stroke()
+        ctx.closePath()
+
+        //Rectangels (RECT)
+        ctx.beginPath()
+        ctx.rect(100, 100, 200, 200,)  //CanvasPath.rect(x: number, y: number, w: number, h: number): void  -----VIKTIG INFO på linjen HER!!
+        ctx.fillStyle = "green"
+        ctx.fill()
+        ctx.stroke() //Svart border rundt firkanten /kanten 
+        ctx.closePath()
+        //.fillRect() ELLER .strokeRect()
+       //ctx.clearRect(0, 0, canvas.width, canvas.height) ______----!!!!!!!!!!!!TØMMER Canvas'et!!!!!!!!!!!!!!! 
+
+        //Sirkel (ARC)
+        ctx.beginPath()
+        ctx.arc(400, 400, 100, 0, 2 * Math.PI)  //CanvasPath.arc(x: number, y: number, radius: number, startAngle: number, endAngle: number, counterclockwise?: boolean): void  -----VIKTIG INFO på linjen HER!!
+        ctx.fillStyle = "gold"
+        ctx.fill()
+        ctx.closePath()
+
+        //Text
+        ctx.beginPath()
+        ctx.font = "150px Georgia"
+        ctx.strokeText("5", 360, 420, )  //CanvasText.strokeText(text: string, x: number, y: number, maxWidth?: number): void
+        ctx.font = "24px areal"
+        ctx.fillStyle = "purple"
+        ctx.fillText("Jonas Markus", 300, 100)
+        ctx.closePath()
+
+        //Tegne et eksisterende bilde inn i Canvas
+        const pumpkin = new Image()
+        let pumpkinLoaded = false
+        pumpkin.onload = () => { pumpkinLoaded = true }
+        pumpkin.src = "pumpkin.png"
+        pumpkinLoaded ? ctx.drawImage(pumpkin, 600, 50) : null
+    </script>
+</body>
+</html>

@@ -4,49 +4,116 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Karakter kalkulator</title>
-</head>
 <style>
     
+    *{
+        margin: 0;
+    }
     main{
-        background-color: rgba(173, 173, 173, 0.397);
+        background-color: rgb(186, 186, 186);
         text-align: center;
         justify-content: center;
         font-family: Arial, Helvetica, sans-serif;
-        font-size: 60px;
-        padding: 150px;
-        margin: 100px;
-    
+        font-size: 40px;
+    }
+    h3 {
+        font-size: 50px !important;
+        margin: 2rem;
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+        font-size: 30px;
+    }
+    p {
+        font-size: 20px;
+    }
+    label {
+        margin: 1rem;
+    }
+    input{
+        width: 150px;
+    }
+    button{
+        padding: 10px 30px;
+        font-size: 20px;
+        border: none;
+        border-radius: 25px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        margin: 20px auto;
+        text-align: center;
     }
 
-    .bokstaver{
-        font-family: Arial, Helvetica, sans-serif;
+    .container{
+        background-color: rgba(255, 255, 255, 0.548);
+        padding: 20px 40px;
+        font-size: 70px;
+        border: none;
+        border-radius: 25px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        margin: 20px auto;
         text-align: center;
-        justify-content: center;
     }
-    form{
-    
-    }
+
 
 </style>
+</head>
 <body>
-    <div class="container">
-        <main>
-            <form>
-                <h3>Regn ut Karakter</h3>
-                <label>
-                    <p>Første oppgaver karakter:</p class="bokstaver">
-                    <input type="number" placeholder="karakter1" min="0" max="10" id="k1">
-                </label>
-                <label>
-                    <p>Andre oppgave karakter:</p class="bokstaver">
-                    <input type="number" placeholder="karakter2" min="0" max="12" id="k2">
-                </label>
-                <input type="button" value="Regn ut karakter">
-            </form>  
-        </main>
-    </div>  
+    <main>
+        <form>
+            <h3>Regn ut karakter</h3>
+        <div class="container"> 
+            <p>Første oppgave karakter (0 til 10):</p>
+            <label>
+                <input type="number" id="karakter_1" min="0" max="10">
+            </label>
+                <p>Andre oppgave karakter (0 til 12):</p>
+            <label>
+                <input type="number" id="karakter_2" min="0" max="12">
+            </label>
+        </div>
+            <button type="submit" id="RegnUtKarakter" disabled>Beregn karakter</button>
+        </form>  
+            <p id="sumAvKarakterer">Your final "karakter" is: <span id="printKarakter"></span></p>
+    </main>
 
 <script>
+    const karakter1 = document.getElementById("karakter_1")
+    const karakter2 = dokument.getElementById("karakter_2")
+    const sumAvKarakterer = document.getElementById("RegnUtKarakter")
+
+    const grades = [
+        {grade: "F", treshold: 0},
+        {grade: "E", treshold: 25},
+        {grade: "D", treshold: 44},
+        {grade: "C", treshold: 68},
+        {grade: "B", treshold: 88},
+        {grade: "A", treshold: 100}
+    ]
+    
+    if(sumEksamner > 0) {
+                karakter = "A";
+            } else if(sumDelEksamner > 320) {
+                karakter = "B";
+            } else if(sumDelEksamner > 240) {
+                karakter = "C";
+            } else if(sumDelEksamner > 200) {
+                karakter = "D";
+            } else if(sumDelEksamner >= 160) {
+                karakter = "E";
+            } else {
+                karakter = "F";
+            }
+    
+    if(button === true)[
+   
+    ]
+
+
+
+
+
+//Og siden det er kun meg hovedsaklig som skal se på koden så bruker jeg Ternary Operator:
 
 </script>
 </body>

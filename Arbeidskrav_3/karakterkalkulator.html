@@ -72,16 +72,40 @@
                 <input type="number" id="karakter_2" min="0" max="12">
             </label>
         </div>
-            <button type="submit" id="RegnUtKarakter" disabled>Beregn karakter</button>
+            <button id="RegnUtKarakter" disabled>Beregn karakter</button>
         </form>  
             <p id="sumAvKarakterer">Your final "karakter" is: <span id="printKarakter"></span></p>
     </main>
 
-<script>
-    const karakter1 = document.getElementById("karakter_1")
-    const karakter2 = dokument.getElementById("karakter_2")
-    const sumAvKarakterer = document.getElementById("RegnUtKarakter")
 
+<script>
+    const PoengOppgave1 = document.getElementById("karakter_1")
+    const PoengOppgave2 = document.getElementById("karakter_2")
+    const sumAvKarakterer = document.getElementById("sumAvKarakterer")
+    const button = document.getElementById("RegnUtKarakter")
+
+//Maksimalt poeng for oppgave 1 og 2:
+    const MaksimaltPoengOppgave1 = 10
+    const MaksimaltPoengOppgave2 = 12
+//Funksjon
+function enableButton() {
+    if(PoengOppgave1.value ==="" || PoengOppgave2.value ==="") {
+        button.disabled = true
+    } else {
+        button.disabled = false
+    }
+}
+
+
+//Knappen skal fungere når det er skrevet noe i input feltene:
+    PoengOppgave1.addEventListener("input", enableButton)
+    PoengOppgave2.addEventListener("input", enableButton)
+    
+    
+
+
+
+//Er en array her:
     const grades = [
         {grade: "F", treshold: 0},
         {grade: "E", treshold: 25},
@@ -90,31 +114,37 @@
         {grade: "B", treshold: 88},
         {grade: "A", treshold: 100}
     ]
-    
-    if(sumEksamner > 0) {
-                karakter = "A";
-            } else if(sumDelEksamner > 320) {
-                karakter = "B";
-            } else if(sumDelEksamner > 240) {
-                karakter = "C";
-            } else if(sumDelEksamner > 200) {
-                karakter = "D";
-            } else if(sumDelEksamner >= 160) {
-                karakter = "E";
-            } else {
-                karakter = "F";
-            }
-    
-    if(button === true)[
-   
-    ]
 
+    // Kalkulere resultat ved skjema innsending
+    document.getElementById('karakterForm').addEventListener('submit', function(e){
+        e.preventDefault();
 
+        const karakter1 = Number(PoengOppgave1.value);
+        const karakter2 = Number(PoengOppgave2.value);
 
+        // Beregn total karakter sum
+        const totalKarakterSum = (0.3 * (karakter1 / MaksimaltPoengOppgave1 * 100)) + (0.7 * (karakter2 / MaksimaltPoengOppgave2 * 100));
 
+        let finalKarakter = grades[0].grade; // Default til laveste karakter
 
-//Og siden det er kun meg hovedsaklig som skal se på koden så bruker jeg Ternary Operator:
+        // Evaluere totalKarakterSum for å finne riktig karakter
+        if (totalKarakterSum >= grades[5].threshold) {
+            finalKarakter = grades[5].grade;
+        } else if (totalKarakterSum >= grades[4].threshold) {
+            finalKarakter = grades[4].grade;
+        } else if (totalKarakterSum >= grades[3].threshold) {
+            finalKarakter = grades[3].grade;
+        } else if (totalKarakterSum >= grades[2].threshold) {
+            finalKarakter = grades[2].grade;
+        } else if (totalKarakterSum >= grades[1].threshold) {
+            finalKarakter = grades[1].grade;
+        }
 
+        // Print resultatet til HTML
+        document.getElementById("printKarakter").innerText = finalKarakter;
+    });
 </script>
 </body>
 </html>
+
+

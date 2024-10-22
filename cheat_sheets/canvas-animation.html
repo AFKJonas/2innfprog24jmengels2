@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas animation cheat sheet</title>
+    <style>
+        body{
+            background: #eee;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        canvas{
+            background: #fff;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="anim-area"></canvas>
+
+    <script>
+        //Canvas konfigurasjon:
+        const c = document.getElementById("anim-area")
+        c.width = 900
+        c.height = 600
+        const ctx = c.getContext("2d")
+
+        //requestAnimationFrame: automatiserer nye bildetegninger
+        const requestAnimationFrame = window.requestAnimationFrame || /*Logisk eller*/ window.webkitRequestAnimationFrame || window.msRequestAnimationFrame || window.
+        mozRequestAnimationFrame
+
+        //Rekursiv funksjon som kaller seg selv avhening av skjerm/nettleser den vises i:
+        function frames() {
+            //Tegne en sirkel:
+            ctx.beginPath()
+            ctx.arc(100, 100, 15, 0, 2 * Math.PI)
+            ctx.fill()
+            ctx.closePath()
+
+            console.log("requestAnimationFrame fungerer")
+            //Rekursiv kall:
+            requestAnimationFrame(frames)
+        }
+        //Kaller frames første gang:
+        frames()
+    </script>
+</body>
+</html>

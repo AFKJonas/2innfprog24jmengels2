@@ -73,11 +73,29 @@
             </div>
         </section>
     </main>
+    <canvas id="drawingarea"></canvas>
     <script>
+        //Canvas sheet:
+        const canvas = document.getElementById("drawingarea")
+        const ctx = canvas.getContext("2d")
+        canvas.height = 600
+        canvas.width = 800
+        
+        //Figur pauseknapp:
+        ctx.beginPath()
+        ctx.rect()
+        ctx.fillStyle = "none"
+        ctx.fill()
+        ctx.stroke()
+        ctx.closePath()
+
+
+
+
         //PREPARE GAME CONFIG AND VARIABLES
         //TODO: config
         const gameConfig = {
-            playerName: "Jostein",
+            playerName: "Jonas Markus",
             energy: 10,
             points: 4000,
             duration: 30

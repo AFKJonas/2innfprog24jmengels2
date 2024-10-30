@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karakter kalkulator</title>
+<style>
+    
+    *{
+        margin: 0;
+    }
+    main{
+        background-color: rgb(186, 186, 186);
+        text-align: center;
+        justify-content: center;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 40px;
+    }
+    h3 {
+        font-size: 50px !important;
+        margin: 2rem;
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+        font-size: 30px;
+    }
+    p {
+        font-size: 20px;
+    }
+    label {
+        margin: 1rem;
+    }
+    input{
+        width: 150px;
+    }
+    button{
+        padding: 10px 30px;
+        font-size: 20px;
+        border: none;
+        border-radius: 25px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        margin: 20px auto;
+        text-align: center;
+    }
+
+    .container{
+        background-color: rgba(255, 255, 255, 0.548);
+        padding: 20px 40px;
+        font-size: 70px;
+        border: none;
+        border-radius: 25px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        margin: 20px auto;
+        text-align: center;
+    }
+
+
+</style>
+</head>
+<body>
+    <main>
+        <form>
+            <h3>Regn ut karakter</h3>
+        <div class="container"> 
+            <p>Første oppgave karakter (0 til 10):</p>
+            <label>
+                <input type="number" id="karakter_1" min="0" max="10">
+            </label>
+                <p>Andre oppgave karakter (0 til 12):</p>
+            <label>
+                <input type="number" id="karakter_2" min="0" max="12">
+            </label>
+        </div>
+            <button id="RegnUtKarakter" disabled>Beregn karakter</button>
+        </form>  
+            <p id="sumAvKarakterer">Your final "karakter" is: <span id="printKarakter"></span></p>
+    </main>
+
+
+<script>
+    const PoengOppgave1 = document.getElementById("karakter_1")
+    const PoengOppgave2 = document.getElementById("karakter_2")
+    const sumAvKarakterer = document.getElementById("sumAvKarakterer")
+    const button = document.getElementById("RegnUtKarakter")
+
+//Maksimalt poeng for oppgave 1 og 2:
+    const MaksimaltPoengOppgave1 = 10
+    const MaksimaltPoengOppgave2 = 12
+//Funksjon
+function enableButton() {
+    if(PoengOppgave1.value ==="" || PoengOppgave2.value ==="") {
+        button.disabled = true
+    } else {
+        button.disabled = false
+    }
+}
+
+
+//Knappen skal fungere når det er skrevet noe i input feltene:
+    PoengOppgave1.addEventListener("input", enableButton)
+    PoengOppgave2.addEventListener("input", enableButton)
+    
+    
+
+
+
+//Er en array her:
+    const grades = [
+        {grade: "F", treshold: 0},
+        {grade: "E", treshold: 25},
+        {grade: "D", treshold: 44},
+        {grade: "C", treshold: 68},
+        {grade: "B", treshold: 88},
+        {grade: "A", treshold: 100}
+    ]
+
+//Regne ut karakterer formel:
+
+    const RegnUtKarakter = (0.3 * (PoengOppgave1 / MaksimaltPoengOppgave1 * 100)) + (0.7 * (PoengOppgave2 / MaksimaltPoengOppgave2 * 100))
+
+//Printer ut den totale karakteren i linjen under:
+    console.log(totalKarakterSum)
+
+
+//If test her, hvis karakter1 er større eller er lik 0, skal vi hente ut "grade" osv 
+    if(totalKarakterSum >=  ) {
+
+
+        finalKarakter = grades[1]
+    }else if( totalKarakterSum >= 44) {
+        finalKarakter = grades[2]
+    }else if( totalKarakterSum >= 68) {
+        finalKarakter = grades[3]
+    }else if( totalKarakterSum >= 88) {
+        finalKarakter = grades[4]
+    } else if( totalKarakterSum = 100) {
+        finalKarakter = grades[5]
+    } else ( totalKarakterSum < 25){
+        finalKarakter = grades[0]
+    }
+    
+
+/*
+    if(sumEksamner > 0) {
+    karakter = "A";
+} else if(sumDelEksamner > 320) {
+    karakter = "B";
+} else if(sumDelEksamner > 240) {
+    karakter = "C";
+} else if(sumDelEksamner > 200) {
+    karakter = "D";
+} else if(sumDelEksamner >= 160) {
+    karakter = "E";
+} else {
+    karakter = "F";
+}
+
+if(button === true)[
+
+]
+
+
+
+
+
+
+
+
+//Og siden det er kun meg hovedsaklig som skal se på koden så bruker jeg Ternary Operator:
+*/
+</script>
+</body>
+</html>
+
+

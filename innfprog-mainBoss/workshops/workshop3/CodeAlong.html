@@ -31,7 +31,7 @@
         </nav>
     </header>
     <main>
-        
+        <canvas id="anim-area"></canvas> 
         <section id="notebook">
             <div id="notebook-page">
                 
@@ -74,174 +74,171 @@
         </section>
     </main>
     <script>
-        //PREPARE GAME CONFIG AND VARIABLES
+            //PREPARE GAME CONFIG AND VARIABLES
+            //CANVAS config:
+        const canvas = document.getElementById("anim-area")
+        canvas.width = 800
+        canvas.height = 600
+        const ctx = canvas.getContext("2d")
 
-
-
-        //CANVAS:
-    const canvas = document.getElementById("drawingarea")
-    canvas.width = 800
-    canvas.height = 600
-    const ctx = canvas.getContext("2d")
-
-        //TODO: config
-        const gameConfig = {
-            playerName: "Jostein",
-            energy: 10,
-            points: 4000,
-            duration: 30,
-            gameConfig: false,
-            gamePausedText: "Press P to pause"
-        }
-
-        console.log(gameConfig)
-       
-        //TODO: notebook
-        const notebook = {
-            variables: 2,
-            loops: 4,
-            functions: 3,
-            arrays: 7
-        }
-
-        //array med spillelementTyper:
-        const itemTypes = ["variable", "function", "loop", "array", "bug", "energydrink"]
-
-        const fortran = {
-            speed: 5,
-            x: canvas.width/2,
-            y: canvas.height/2,
-
-
-        }
-
-        //(BONUS) TODO: function for all prints
-        function updateStaticUI() {
-            //TODO: print playerinfo to HTML
-            if(gameConfig.playerName === "") {
-                document.getElementById("playerName").innerHTML = "Waiting for player..."
-            } else {
-                document.getElementById("playerName").innerHTML = gameConfig.playerName
+            //TODO: config
+            const gameConfig = {
+                playerName: "Jostein",
+                energy: 10,
+                points: 4000,
+                duration: 30,
+                gamePaused: false,
+                gamePausedText: "Press P to pause"
             }
-            document.getElementById("energy").innerHTML = gameConfig.energy
-            document.getElementById("points").innerHTML = gameConfig.points
-            document.getElementById("duration").innerHTML = gameConfig.duration
-            
-            //TODO: print notebook info to HTML
-            document.getElementById("variables").innerHTML = notebook.variables
-            document.getElementById("loops").innerHTML = notebook.loops
-            document.getElementById("functions").innerHTML = notebook.functions
-            document.getElementById("arrays").innerHTML = notebook.arrays
-        }
 
-        updateStaticUI()
-
-        //WS2, Oppg 1:
-        function toggleVisibility(elementid) {
-            console.log(elementid)
-            const elem = document.getElementById(elementid)
-            if(elem.classList.contains("hidden")) {
-                elem.style.display = "block"
-                elem.classList.remove("hidden")
-            } else {
-                elem.style.display = "none"
-                elem.classList.add("hidden")
+            console.log(gameConfig)
+        
+            //TODO: notebook
+            const notebook = {
+                variables: 2,
+                loops: 4,
+                functions: 3,
+                arrays: 7
             }
-        }
-        //WS2, Oppg 2:
-        document.addEventListener("keydown", function(event) {
-            if(event.key === "n") {
-                toggleVisibility("notebook")
-            }
-            if(event.key === "i") {
-                toggleVisibility("info")
-            }
-        })
-        //WS2, Oppg 3:
-        document.getElementById("notebookToggler").addEventListener("click", function() {
-            toggleVisibility("notebook")
-        })
-        document.getElementById("infoToggler").addEventListener("click", function() {
-            toggleVisibility("info")
-        })
-        //WS2, Oppg 4:
-        function updateSingleStaticUI(elementid, value) {
-            document.getElementById(elementid).innerHTML = value
-        }
-        //updateSingleStaticUI("duration", 31)
+
+            //ws3 oppgave 5,1: array med spillelementTyper:
+            const itemTypes = ["variable", "function", "loop", "array", "bug", "energydrink"]
+
+            const fortran = {
+                speed: 5,
+                x: canvas.width / 2,
+                y: canvas.height / 2
 
 
-        //WS2, Oppg 5:
-        function updateConfigValue(configType, value) {
-            configType === "energy" ? gameConfig.energy += value : null
-            configType === "points" ? gameConfig.points += value : null
-            configType === "duration" ? gameConfig.duration += value : null
-            configType === "variables" ? notebook.variables += value : null
-            configType === "arrays" ? notebook.arrays += value : null
-            configType === "functions" ? notebook.functions += value : null
-            configType === "loops" ? notebook.loops += value : null
+            }
+
+            //(BONUS) TODO: function for all prints
+            function updateStaticUI() {
+                //TODO: print playerinfo to HTML
+                if(gameConfig.playerName === "") {
+                    document.getElementById("playerName").innerHTML = "Waiting for player..."
+                } else {
+                    document.getElementById("playerName").innerHTML = gameConfig.playerName
+                }
+                document.getElementById("energy").innerHTML = gameConfig.energy
+                document.getElementById("points").innerHTML = gameConfig.points
+                document.getElementById("duration").innerHTML = gameConfig.duration
+                
+                //TODO: print notebook info to HTML
+                document.getElementById("variables").innerHTML = notebook.variables
+                document.getElementById("loops").innerHTML = notebook.loops
+                document.getElementById("functions").innerHTML = notebook.functions
+                document.getElementById("arrays").innerHTML = notebook.arrays
+            }
 
             updateStaticUI()
-        }
-        updateConfigValue("energy", -3)
-        updateConfigValue("duration", 100)
-        updateConfigValue("loops", 1000)
 
-       
+            //WS2, Oppg 1:
+            function toggleVisibility(elementid) {
+                console.log(elementid)
+                const elem = document.getElementById(elementid)
+                if(elem.classList.contains("hidden")) {
+                    elem.style.display = "block"
+                    elem.classList.remove("hidden")
+                } else {
+                    elem.style.display = "none"
+                    elem.classList.add("hidden")
+                }
+            }
+            //WS2, Oppg 2:
+            document.addEventListener("keydown", function(event) {
+                if(event.key === "n") {
+                    toggleVisibility("notebook")
+                }
+                if(event.key === "i") {
+                    toggleVisibility("info")
+                }
+            })
+            //WS2, Oppg 3:
+            document.getElementById("notebookToggler").addEventListener("click", function() {
+                toggleVisibility("notebook")
+            })
+            document.getElementById("infoToggler").addEventListener("click", function() {
+                toggleVisibility("info")
+            })
+            //WS2, Oppg 4:
+            function updateSingleStaticUI(elementid, value) {
+                document.getElementById(elementid).innerHTML = value
+            }
+            //updateSingleStaticUI("duration", 31)
 
-        //WS3, oppg 3: Tegne Fortran:
-        let fortranLoaded = false
-        let fortranImage = new Image()
-        fortranImage.src = "workshops/workshop3/icons/fortran.png"
-        fortranImage.onload = () => { fortranLoaded = true; }
+
+            //WS2, Oppg 5:
+            function updateConfigValue(configType, value) {
+                configType === "energy" ? gameConfig.energy += value : null
+                configType === "points" ? gameConfig.points += value : null
+                configType === "duration" ? gameConfig.duration += value : null
+                configType === "variables" ? notebook.variables += value : null
+                configType === "arrays" ? notebook.arrays += value : null
+                configType === "functions" ? notebook.functions += value : null
+                configType === "loops" ? notebook.loops += value : null
+
+                updateStaticUI()
+            }
+            updateConfigValue("energy", -3)
+            updateConfigValue("duration", 100)
+            updateConfigValue("loops", 1000)
+
+        
+
+            //WS3, oppg 3: Tegne Fortran:
+            let fortranLoaded = false
+            let fortranImage = new Image()
+            fortranImage.src = "icons/fortran.png"
+            fortranImage.onload = () => { fortranLoaded = true; }
 
 
-        //ws3, oppg 5,2 drawItem():
-        function drawItem(type, x, y) {
-            let itemImage = new Image()
-            itemImage.src = `innfprog-mainBoss/workshops/workshop3/icons/${type}.svg`
-            itemImage.onload = () => { ctx.drawImage(itemImage, x, y) }
-        }
-
-        const requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationframe || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame
-        function drawElements() {
-
-            console.log("requestAnimationFrame kjører")
-
-            if(fortranLoaded === true) {
-                ctx.drawImage(fortranImage, fortran.x, fortran.y)
+            //ws3, oppg 5,2 drawItem():
+            function drawItem(type, x, y) {
+                let itemImage = new Image()
+                itemImage.src = `icons/${type}.svg`
+                itemImage.onload = () => { ctx.drawImage(itemImage, x, y) }
             }
 
-            //WS3, oppg 4,2:
-            if(gameConfig.gamePaused === true) {
-                ctx. beginPath()
-                ctx.font ="100px arial"
-                ctx.fillStyle = "red"
-                ctx.filltext ("PAUSED", 250, 300)
+            const requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationframe || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame
+            
+            function drawElements() {
+                console.log("requestAnimationFrame kjører")
+
+                if(fortranLoaded === true) {
+                    ctx.drawImage(fortranImage, fortran.x, fortran.y)
+                }
+
+                //WS3, oppg 4,2:
+                if(gameConfig.gamePaused === true) {
+                    ctx.beginPath()
+                    ctx.font ="100px Arial"
+                    ctx.fillStyle = "red"
+                    ctx.fillText ("PAUSED", 250, 300)
+                    ctx.closePath()
+
+                    //Opptatere pause info tekst:
+                    gameConfig.gamePausedText = "Press P to unpause"
+                } else {
+                    gameConfig.gamePausedText = "Press P to pause"
+                }
+
+                drawItem("variable", 50, 100)
+                drawItem("loop", 400, 500)
+                
+                //WS3, oppg 2: Pause tekst:
+                ctx.beginPath()
+                ctx.fillStyle = "#ffffff"
+                ctx.fillRect(650, 570, 200, 30)
+                ctx.fillStyle = "#3c429b"
+                ctx.font = "15px Areal"
+                ctx.fillText(gameConfig.gamePausedText, 660, 590)
                 ctx.closePath()
 
-                //Opptatere pause info tekst:
-                gameConfig.gamePausedText = "Press P to unpause"
-            } else {
-                gameConfig.gamePausedText = "Press P to pause"
+                requestAnimationFrame(drawElements)
             }
 
-            drawItem("variable", 50, 100)
-            drawItem("loop", 400, 500)
-             
-            //WS3, oppg 2: Paue tekst:
-            ctx.beginPath()
-            ctx.fillStyle = "#fffff"
-            ctx.fillRect(650, 570, 200, 30)
-            ctx.fillStyle = "#3c429b"
-            ctx.font = "15px areal"
-            ctx.filltext(gameConfig.gamePausedText, 660, 590)
-            ctx.closePath()
-
-            requestAnimationFrame(drawElements)
-        }
-
-        drawElements()
+            drawElements()
 
     </script>
 </body>

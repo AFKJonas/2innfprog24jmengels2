@@ -6,6 +6,9 @@
     <title>Karakter kalkulator</title>
 <style>
     
+    /*
+    CSS styling for å gjøre utseendet på kalkulatoren oversiktlig og nice ut:
+    */
     *{
         margin: 0;
     }
@@ -16,7 +19,7 @@
         font-family: Arial, Helvetica, sans-serif;
         font-size: 40px;
     }
-    h3 {
+    h1 {
         font-size: 50px !important;
         margin: 2rem;
     }
@@ -61,51 +64,37 @@
 <body>
     <main>
         <form>
-            <h3>Regn ut karakter</h3>
+            <h1>Regn ut karakter</h1>
         <div class="container"> 
             <p>Første oppgave karakter (0 til 10):</p>
             <label>
+                <!---Definert den høyeste(max/10) og laveste(min/0) verdien man kan ha i feltet, i linjen under-->
                 <input type="number" id="karakter_1" min="0" max="10">
             </label>
                 <p>Andre oppgave karakter (0 til 12):</p>
             <label>
+                <!--Samme er gjort på linjen under, med max og min--->
                 <input type="number" id="karakter_2" min="0" max="12">
             </label>
         </div>
-            <button id="RegnUtKarakter" disabled>Beregn karakter</button>
+            <button id="regnUtKarakter" disabled>Beregn karakter</button>
         </form>  
-            <p id="sumAvKarakterer">Your final "karakter" is: <span id="printKarakter"></span></p>
+            <p id="finalekarakterPrint">Your final "karakter" is: <span id="printKarakter"></span></p>
     </main>
 
 
 <script>
-    const PoengOppgave1 = document.getElementById("karakter_1")
-    const PoengOppgave2 = document.getElementById("karakter_2")
-    const sumAvKarakterer = document.getElementById("sumAvKarakterer")
-    const button = document.getElementById("RegnUtKarakter")
+    //Variabler:
+    const poengOppgave1 = document.getElementById("karakter_1")
+    const poengOppgave2 = document.getElementById("karakter_2")
+    const finalekarakter = document.getElementById("finalekarakterPrint")
+    const button = document.getElementById("regnUtKarakter")
 
 //Maksimalt poeng for oppgave 1 og 2:
-    const MaksimaltPoengOppgave1 = 10
-    const MaksimaltPoengOppgave2 = 12
-//Funksjon
-function enableButton() {
-    if(PoengOppgave1.value ==="" || PoengOppgave2.value ==="") {
-        button.disabled = true
-    } else {
-        button.disabled = false
-    }
-}
+    const maksimaltPoengOppgave1 = 10
+    const maksimaltPoengOppgave2 = 12
 
-
-//Knappen skal fungere når det er skrevet noe i input feltene:
-    PoengOppgave1.addEventListener("input", enableButton)
-    PoengOppgave2.addEventListener("input", enableButton)
-    
-    
-
-
-
-//Er en array her:
+    //Array her er ifra oppgaveteksten:
     const grades = [
         {grade: "F", treshold: 0},
         {grade: "E", treshold: 25},
@@ -115,31 +104,48 @@ function enableButton() {
         {grade: "A", treshold: 100}
     ]
 
-//Regne ut karakterer formel:
+//Funksjon for å aktivere/deaktivere knappen:
+function enableButton() {
+    if(poengOppgave1.value ==="" || poengOppgave2.value ==="" || poengOppgave1.value < 0 || poengOppgave2.value < 0 || poengOppgave1.value > maksimaltPoengOppgave1 || poengOppgave2.value > maksimaltPoengOppgave2) {
+        button.disabled = true
+    } else {
+        button.disabled = false
+        }
+    }
 
-    const RegnUtKarakter = (0.3 * (PoengOppgave1 / MaksimaltPoengOppgave1 * 100)) + (0.7 * (PoengOppgave2 / MaksimaltPoengOppgave2 * 100))
+//Knappen skal fungere når det er skrevet tall fra 0 - 10 i øverste felt, og 0 - 12 i det nederste input feltene:
+    poengOppgave1.addEventListener("input", enableButton)
+    poengOppgave2.addEventListener("input", enableButton)
+    
 
-//Printer ut den totale karakteren i linjen under:
-    console.log(totalKarakterSum)
 
+//Regne ut både poendOppgave1 og poengOppgave2, og legge de samlet til en variabel (regnUtKarakter). Regnestykket er tatt ifra Oppgaveteksten: "(0.3 * (poengOppgave1 / maksimaltPoengOppgave1 * 100)) + (0.7 * (poengOppgave2 / maksimaltPoengOppgave2 * 100))":
+    let regnUtKarakter = (0.3 * (poengOppgave1 / maksimaltPoengOppgave1 * 100)) + (0.7 * (poengOppgave2 / maksimaltPoengOppgave2 * 100))
+
+//Printet ut den totale karakteren i linjen under:
+    
+console.log(regnUtKarakter)
 
 //If test her, hvis karakter1 er større eller er lik 0, skal vi hente ut "grade" osv 
-    if(totalKarakterSum >=  ) {
+//------------------------------------------------------------------------------------------------------Er her nå ved Operatorer------------------------------------------------------------------------------------------------------
 
 
-        finalKarakter = grades[1]
-    }else if( totalKarakterSum >= 44) {
-        finalKarakter = grades[2]
-    }else if( totalKarakterSum >= 68) {
-        finalKarakter = grades[3]
-    }else if( totalKarakterSum >= 88) {
+
+
+
+
+        /*
         finalKarakter = grades[4]
-    } else if( totalKarakterSum = 100) {
-        finalKarakter = grades[5]
-    } else ( totalKarakterSum < 25){
+    }else if( regnUtKarakter >= 68) {
+        finalKarakter = grades[3]
+    }else if( regnUtKarakter >= 44) {
+        finalKarakter = grades[2]
+    } else if( regnUtKarakter = 25) {
+        finalKarakter = grades[1]
+    } else {
         finalKarakter = grades[0]
     }
-    
+        */
 
 /*
     if(sumEksamner > 0) {
@@ -159,16 +165,8 @@ function enableButton() {
 if(button === true)[
 
 ]
-
-
-
-
-
-
-
-
-//Og siden det er kun meg hovedsaklig som skal se på koden så bruker jeg Ternary Operator:
 */
+
 </script>
 </body>
 </html>

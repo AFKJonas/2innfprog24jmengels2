@@ -77,9 +77,9 @@
                 <input type="number" id="karakter_2" min="0" max="12">
             </label>
         </div>
-            <button id="regnUtKarakter" disabled>Beregn karakter</button>
+            <button id="regnUtKarakter" disabled onclick="btn()">Beregn karakter</button>
         </form>  
-            <p id="finalekarakterPrint">Your final "karakter" is: <span id="printKarakter"></span></p>
+            <p id="finalekarakterPrint">Din karakter er: <span id="printKarakter"></span></p>
     </main>
 
 
@@ -89,12 +89,13 @@
     const poengOppgave2 = document.getElementById("karakter_2")
     const finalekarakter = document.getElementById("finalekarakterPrint")
     const button = document.getElementById("regnUtKarakter")
+    const printKarakter = document.getElementById("printKarakter")
 
 //Maksimalt poeng for oppgave 1 og 2:
     const maksimaltPoengOppgave1 = 10
     const maksimaltPoengOppgave2 = 12
 
-    //Array her er ifra oppgaveteksten:
+    //Array her er direkte tatt ifra oppgaveteksten:
     const grades = [
         {grade: "F", treshold: 0},
         {grade: "E", treshold: 25},
@@ -112,6 +113,43 @@ function enableButton() {
         button.disabled = false
         }
     }
+    
+    //Funksjon for å se i console log om feilsøking, og hva som skjer med de ulike variablene og om knappen fungerer:
+function btn(){
+    console.log("klikket")
+    console.log(poengOppgave1.value)
+    console.log(poengOppgave2.value)
+
+//Regne ut begge karakterene og legge de sammen i en variabel: (regnUtKarakter), for å finne den totale karakteren, OG selve koden "= (0.3 * (poengOppgave1.value / maksimaltPoengOppgave1 * 100)) + (0.7 * (poengOppgave2.value / maksimaltPoengOppgave2 * 100))" er direkte tatt ifra oppgaveteksen:
+    let regnUtKarakter = (0.3 * (poengOppgave1.value / maksimaltPoengOppgave1 * 100)) + (0.7 * (poengOppgave2.value / maksimaltPoengOppgave2 * 100))
+    console.log(regnUtKarakter)
+
+    //Definert en variabel som skal inneholde summen av de to karakterene:
+    let finalKarakter = ""
+
+    //If test her, fordi hver gang knappen trykkes, skal den regne ut karakteren og ikke før.  
+    if (regnUtKarakter >= grades[5].treshold) {
+            finalKarakter = grades[5].grade;
+        } else if (regnUtKarakter >= grades[4].treshold) {
+            finalKarakter = grades[4].grade;
+        } else if (regnUtKarakter >= grades[3].treshold) {
+            finalKarakter = grades[3].grade;
+        } else if (regnUtKarakter >= grades[2].treshold) {
+            finalKarakter = grades[2].grade;
+        } else if (regnUtKarakter >= grades[1].treshold) {
+            finalKarakter = grades[1].grade;
+        } else {
+            finalKarakter = grades[0].grade;
+        }
+
+        console.log(finalKarakter)
+
+        //Printet ut den totale karakteren i p taggen:
+    printKarakter.innerHTML = finalKarakter
+
+}
+
+
 
 //Knappen skal fungere når det er skrevet tall fra 0 - 10 i øverste felt, og 0 - 12 i det nederste input feltene:
     poengOppgave1.addEventListener("input", enableButton)
@@ -119,53 +157,16 @@ function enableButton() {
     
 
 
-//Regne ut både poendOppgave1 og poengOppgave2, og legge de samlet til en variabel (regnUtKarakter). Regnestykket er tatt ifra Oppgaveteksten: "(0.3 * (poengOppgave1 / maksimaltPoengOppgave1 * 100)) + (0.7 * (poengOppgave2 / maksimaltPoengOppgave2 * 100))":
-    let regnUtKarakter = (0.3 * (poengOppgave1 / maksimaltPoengOppgave1 * 100)) + (0.7 * (poengOppgave2 / maksimaltPoengOppgave2 * 100))
-
-//Printet ut den totale karakteren i linjen under:
     
-console.log(regnUtKarakter)
-
-//If test her, hvis karakter1 er større eller er lik 0, skal vi hente ut "grade" osv 
-//------------------------------------------------------------------------------------------------------Er her nå ved Operatorer------------------------------------------------------------------------------------------------------
 
 
 
+    
+
+    
 
 
 
-        /*
-        finalKarakter = grades[4]
-    }else if( regnUtKarakter >= 68) {
-        finalKarakter = grades[3]
-    }else if( regnUtKarakter >= 44) {
-        finalKarakter = grades[2]
-    } else if( regnUtKarakter = 25) {
-        finalKarakter = grades[1]
-    } else {
-        finalKarakter = grades[0]
-    }
-        */
-
-/*
-    if(sumEksamner > 0) {
-    karakter = "A";
-} else if(sumDelEksamner > 320) {
-    karakter = "B";
-} else if(sumDelEksamner > 240) {
-    karakter = "C";
-} else if(sumDelEksamner > 200) {
-    karakter = "D";
-} else if(sumDelEksamner >= 160) {
-    karakter = "E";
-} else {
-    karakter = "F";
-}
-
-if(button === true)[
-
-]
-*/
 
 </script>
 </body>

@@ -20,7 +20,7 @@
         font-size: 40px;
     }
     h1 {
-        font-size: 50px !important;
+        font-size: 50px;
         margin: 2rem;
     }
     form {
@@ -63,7 +63,7 @@
 </head>
 <body>
     <main>
-        <form>
+
             <h1>Regn ut karakter</h1>
         <div class="container"> 
             <p>Første oppgave karakter (0 til 10):</p>
@@ -78,8 +78,8 @@
             </label>
         </div>
             <button id="regnUtKarakter" disabled onclick="btn()">Beregn karakter</button>
-        </form>  
-            <p id="finalekarakterPrint">Din karakter er: <span id="printKarakter"></span></p>
+            <!---Printet ut den totale karakteren i linjen under--->
+            <p>Din karakter er: <span id="printKarakterUtskrift"></span></p>
     </main>
 
 
@@ -87,9 +87,8 @@
     //Variabler:
     const poengOppgave1 = document.getElementById("karakter_1")
     const poengOppgave2 = document.getElementById("karakter_2")
-    const finalekarakter = document.getElementById("finalekarakterPrint")
     const button = document.getElementById("regnUtKarakter")
-    const printKarakter = document.getElementById("printKarakter")
+    const printKarakter = document.getElementById("printKarakterUtskrift")
 
 //Maksimalt poeng for oppgave 1 og 2:
     const maksimaltPoengOppgave1 = 10
@@ -141,14 +140,14 @@ function btn(){
         } else {
             finalKarakter = grades[0].grade;
         }
-
+        //Skriver ut regnestykket i console log for å se at den regner ut riktig/funker:
         console.log(finalKarakter)
 
         //Printet ut den totale karakteren i p taggen:
-    printKarakter.innerHTML = finalKarakter
-
+        printKarakter.innerHTML = finalKarakter
+    
 }
-
+    
 
 
 //Knappen skal fungere når det er skrevet tall fra 0 - 10 i øverste felt, og 0 - 12 i det nederste input feltene:

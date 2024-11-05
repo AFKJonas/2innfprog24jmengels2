@@ -42,19 +42,17 @@
         font-size: 20px;
         border: none;
         border-radius: 25px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         margin: 20px auto;
         text-align: center;
     }
 
     .container{
         background-color: rgba(255, 255, 255, 0.548);
-        padding: 20px 40px;
+        padding: auto;
         font-size: 70px;
         border: none;
         border-radius: 25px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        margin: 20px auto;
+        margin: auto;
         text-align: center;
     }
 
@@ -66,12 +64,14 @@
 
             <h1>Regn ut karakter</h1>
         <div class="container"> 
-            <p>Første oppgave karakter (0 til 10):</p>
+            <p>Første oppgave karakter (0 til 10)</p>
+            <p>(teller 30% av den totale karakteren)</p>
             <label>
                 <!---Definert den høyeste(max/10) og laveste(min/0) verdien man kan ha i feltet, i linjen under-->
                 <input type="number" id="karakter_1" min="0" max="10">
             </label>
-                <p>Andre oppgave karakter (0 til 12):</p>
+                <p>Andre oppgave karakter (0 til 12)</p>
+                <p>(teller 70% av den totale karakteren)</p>
             <label>
                 <!--Samme er gjort på linjen under, med max og min--->
                 <input type="number" id="karakter_2" min="0" max="12">

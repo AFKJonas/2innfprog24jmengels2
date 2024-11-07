@@ -12,13 +12,6 @@
     <link rel="mask-icon" href="meta/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
-    <style>
-        #drawingarea {
-            background-color: #fff;
-            display: block;
-            margin: 0 auto;
-        }
-    </style>
 </head>
 <body>
     <header>
@@ -38,8 +31,8 @@
         </nav>
     </header>
     <main>
-        
-        <section id="notebook">
+        <canvas id="anim-area"></canvas>
+        <section id="notebook" class="hidden">
             <div id="notebook-page">
                 
                 <h2>Notater</h2>
@@ -80,82 +73,22 @@
             </div>
         </section>
     </main>
-    <canvas id="drawingarea"></canvas>
     <script>
-        //Ws3, Oppg 1:
-        //Canvas sheet:
-        const canvas = document.getElementById("drawingarea")
-        const ctx = canvas.getContext("2d")
-        canvas.height = 600
-        canvas.width = 800
-        
-        //Figur pauseknapp:
-        ctx.beginPath()
-        ctx.rect(625, 560, 175, 40,)
-        ctx.fillStyle = "#fff"
-        ctx.fill()
-        ctx.closePath()
-
-        //Teksten i pauseknappen:
-        ctx.beginPath()
-        ctx.font = "20px Arial"
-        ctx.fillStyle = "#3c429b"
-        ctx.fillText("Press P to unpause", 625, 585)
-        ctx.closePath()
-
-
-        //Figur bilde helt fast:
-        const heroImage = new Image()
-        let heroImageLoaded = false
-        heroImage.onload = () => { heroImageLoaded = true }
-        heroImage.src = "innfprog-mainBoss/workshops/workshop3/hero.png"
-        
-
-
-
-        /*
-        //Figur Helt:
-        const fortran = {
-            speed: 5;
-            x: 38s0;            
-        }        
-        const heroImage = new Image()
-
-        let heroImageLoaded = false
-            heroimage.onload = () => { heroImageLoaded = true 
-            ctx.drawImage(heroImage, 100, 50)
-        }
-        heroImage.src = "innfprog-mainBoss/workshops/workshop3/hero.png";
-*/
-
-         
-
-
-
-
-
-/*
-//Rectangels (RECT)
-ctx.beginPath()
-        ctx.rect(100, 100, 200, 200,)  //CanvasPath.rect(x: number, y: number, w: number, h: number): void  -----VIKTIG INFO på linjen HER!!
-        ctx.fillStyle = "green"
-        ctx.fill()
-        ctx.stroke() //Svart border rundt firkanten /kanten 
-        ctx.closePath()
-        //.fillRect() ELLER .strokeRect()
-       //ctx.clearRect(0, 0, canvas.width, canvas.height) ______----!!!!!!!!!!!!TØMMER Canvas'et!!!!!!!!!!!!!!! 
-
-*/
-
-
-
         //PREPARE GAME CONFIG AND VARIABLES
+        //Canvas-configuration:
+        const canvas = document.getElementById("anim-area")
+        canvas.width = 800
+        canvas.height = 600
+        const ctx = canvas.getContext("2d")
+
         //TODO: config
         const gameConfig = {
-            playerName: "Jonas Markus",
-            energy: 10,
-            points: 4000,
-            duration: 30
+            playerName: "Jonas M",
+            energy: 3,
+            points: 0,
+            duration: 0,
+            gamePaused: false,
+            gamePausedText: "Press P to pause"
         }
 
         console.log(gameConfig)
@@ -168,6 +101,22 @@ ctx.beginPath()
             arrays: 7
         }
 
+        //WS3, Oppg 5.1: Array med spillelementtyper:
+        const itemTypes = ["variable", "function", "loop", "array", "bug", "energydrink"]
+
+        //Konfigurerer Fortran:
+        const fortran = {
+            speed: 5,
+            x: canvas.width / 2,
+            y: canvas.height / 2
+        }
+        //ws4, oppg 5: Lager for elementer:
+        const items = [
+            {type: "variable", x: 100, y: 50, lifetimme: 8, caught: false},
+            {type: "loop", x: 430, y: 290, lifetimme: 3, caught: false},
+            {type: "bug", x: 500, y: 600, lifetimme: 0, caught: false},
+            {type: "function", x: 300, y: 400, lifetimme: 0, caught: false},
+        ]
         
 
         //(BONUS) TODO: function for all prints
@@ -203,6 +152,13 @@ ctx.beginPath()
                 elem.classList.add("hidden")
             }
         }
+
+        //ws4, oppg 1: Konfigurere retningsstatus-variabler:
+        let up = false
+        let down = false
+        let right = false
+        let left = false
+
         //WS2, Oppg 2:
         document.addEventListener("keydown", function(event) {
             if(event.key === "n") {
@@ -210,6 +166,39 @@ ctx.beginPath()
             }
             if(event.key === "i") {
                 toggleVisibility("info")
+            }
+            //ws4 oppg 1: skjekker etter taster før retningsendring:
+            if (event.key === "w" || event.key === "ArrowUp") {
+                up = true
+            } 
+            if (event.key === "s" || event.key === "ArrowDown") {
+                down = true
+            }
+            if (event.key === "d" || event.key === "ArrowRight") {
+                right = true
+
+            }
+            if (event.key === "a" || event.key === "ArrowLeft") {
+                left = true
+            }
+            //Paussestatus:
+            if(event.key ==="p") {
+                gameConfig.gamePaused = !gameConfig.gamePaused
+            }
+        })
+        document.addEventListener("keyup", function(event) {
+            if (event.key === "w" || event.key === "ArrowUp") {
+                up = false
+            } 
+            if (event.key === "s" || event.key === "ArrowDown") {
+                down = false
+            }
+            if (event.key === "d" || event.key === "ArrowRight") {
+                right = false
+
+            }
+            if (event.key === "a" || event.key === "ArrowLeft") {
+                left = false
             }
         })
         //WS2, Oppg 3:
@@ -238,9 +227,109 @@ ctx.beginPath()
 
             updateStaticUI()
         }
+
+        /*
         updateConfigValue("energy", -3)
         updateConfigValue("duration", 100)
         updateConfigValue("loops", 1000)
+        */
+        
+
+        //WS3, Oppg 3: Fortran
+        let fortranLoaded = false
+        let fortranImage = new Image()
+        fortranImage.src = "icons/fortran.png"
+        fortranImage.onload = () => { fortranLoaded = true; }
+
+        //WS3, Oppg. 5.2: drawItem()
+        function drawItem(type, x, y) {
+            let itemImage = new Image()
+            itemImage.src = `icons/${type}.svg`
+           // itemImage.onload = () => { ctx.drawImage(itemImage, x, y) }
+           ctx.drawImage(itemImage, x, y) 
+           //WS3, Oppg. 5.3: Utskrift av levetid:
+            if(type != "bug") {
+                ctx.beginPath()
+                ctx.arc(x, y, 10, 0, 2 * Math.PI)
+                ctx.fillStyle = "red"
+                ctx.fill()
+                ctx.fillStyle = "white"
+                ctx.font = "11px Verdana"
+                ctx.fillText("99", x - 7, y + 4)
+                ctx.closePath()
+            }
+        }
+        setInterval(function() {
+            console.log("setInterval kjører")
+           if (gameConfig.gamePaused === false) {
+            updateSingleStaticUI("duration", gameConfig.duration) 
+            gameConfig.duration++
+           }
+        }, 1000)
+
+        const requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame
+
+        function drawElements() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height)
+            console.log("requestAnimationFrame kjører")
+
+            //WS3, Oppg 1: beveger Fortran: oG Pauser spillet
+            if(gameConfig.gamePaused === false) { 
+                if(up === true) {
+                    fortran.y = fortran.y - fortran.speed
+                }
+                if(down === true) {
+                    fortran.y = fortran.y + fortran.speed
+                }
+                if(right === true) {
+                    fortran.x = fortran.x + fortran.speed
+                }
+                if(left === true) {
+                    fortran.x = fortran.x - fortran.speed
+                }
+            }
+
+            if(fortranLoaded === true) {
+                ctx.drawImage(fortranImage, fortran.x, fortran.y)
+            }
+
+            //WS3, Oppg 4.2: 
+            if(gameConfig.gamePaused === true) {
+                ctx.beginPath()
+                ctx.font = "100px Arial"
+                ctx.fillStyle = "red"
+                ctx.fillText("PAUSED", 250, 300)
+                ctx.closePath()
+
+                //Oppdatere pauseinfotekst:
+                gameConfig.gamePausedText = "Press P to unpause"
+            } else {
+                gameConfig.gamePausedText = "Press P to pause"
+            }
+
+            /*
+            //WS3, oppg 5.2 test:
+            drawItem("function", 50, 100)
+            drawItem("bug", 400, 500)
+            */
+           items.map((item, index) => {
+            drawItem(item.type, item.x, item.y)
+           })
+            //WS3, Oppg 2: Pausetext
+            ctx.beginPath()
+            ctx.fillStyle = "#ffffff"
+            ctx.fillRect(650, 570, 200, 30)
+            ctx.fillStyle = "#3c429b"
+            ctx.font = "15px Arial"
+            ctx.fillText(gameConfig.gamePausedText, 660, 590)
+            ctx.closePath()
+
+            requestAnimationFrame(drawElements)
+        }
+
+        drawElements()
+
+
 
     </script>
 </body>

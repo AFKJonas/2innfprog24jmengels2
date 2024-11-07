@@ -31,8 +31,8 @@
         </nav>
     </header>
     <main>
-        
-        <section id="notebook">
+        <canvas id="anim-area" width="800" height="600"></canvas>
+        <section id="notebook" class="hidden">
             <div id="notebook-page">
                 
                 <h2>Notater</h2>
@@ -271,6 +271,17 @@
             let itemImage = new Image()
             itemImage.src = `innfprog-mainBoss/workshops/workshop3/icons/${type}.svg`
             itemImage.onload = () => { ctx.drawImage(itemImage, x, y) }
+            //ws oppg 5,3: Utskrift av levetid:
+            if(type != "bug ") {
+                ctx.beginPath()
+                ctx.arc(x, y, 10, 0, 2 * Math.PI)
+                ctx.fillStyle = "red"
+                ctx.fill()
+                ctx.fillStyle = "white"
+                ctx.font = "11px Verdana"
+                ctx.filltext("99". x - 7, y + 4)
+                ctx.closePath()
+            }
         }
 
         const requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationframe || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame
@@ -296,8 +307,8 @@
                 gameConfig.gamePausedText = "Press P to pause"
             }
 
-            drawItem("bug", 50, 100)
-            drawItem("energydrink", 400, 500)
+            drawItem("function", 50, 100)
+            drawItem("bug", 400, 500)
              
             //WS3, oppg 2: Paue tekst:
             ctx.beginPath()

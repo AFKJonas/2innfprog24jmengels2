@@ -112,10 +112,10 @@
         }
         //ws4, oppg 5: Lager for elementer:
         const items = [
-            {type: "variable", x: 100, y: 50, lifetimme: 8, caught: false},
-            {type: "loop", x: 430, y: 290, lifetimme: 3, caught: false},
-            {type: "bug", x: 500, y: 600, lifetimme: 0, caught: false},
-            {type: "function", x: 300, y: 400, lifetimme: 0, caught: false},
+            {type: "variable", x: 100, y: 50, lifetime: 8, caught: false},
+            {type: "loop", x: 430, y: 290, lifetime: 3, caught: false},
+            {type: "bug", x: 500, y: 600, lifetime: 0, caught: false},
+            {type: "function", x: 300, y: 400, lifetime: 0, caught: false},
         ]
         
 
@@ -242,11 +242,11 @@
         fortranImage.onload = () => { fortranLoaded = true; }
 
         //WS3, Oppg. 5.2: drawItem()
-        function drawItem(type, x, y) {
+        function drawItem(type, x, y, lifetime) {
             let itemImage = new Image()
             itemImage.src = `icons/${type}.svg`
            // itemImage.onload = () => { ctx.drawImage(itemImage, x, y) }
-           ctx.drawImage(itemImage, x, y) 
+           ctx.drawImage(itemImage, x, y, ) 
            //WS3, Oppg. 5.3: Utskrift av levetid:
             if(type != "bug") {
                 ctx.beginPath()
@@ -255,7 +255,7 @@
                 ctx.fill()
                 ctx.fillStyle = "white"
                 ctx.font = "11px Verdana"
-                ctx.fillText("99", x - 7, y + 4)
+                ctx.fillText(lifetime, x - 7, y + 4)
                 ctx.closePath()
             }
         }
